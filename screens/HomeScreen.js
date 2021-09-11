@@ -12,19 +12,18 @@ import AppHeader from '../components/AppHeader';
 import db from '../config';
 
 export default class HomeScreen extends Component {
+  teamA() {
+    db.ref('/').update({
+      teamA: 1,
+    });
+  }
 
-  teamA(){
-   db.ref('/').update({
-     'teamA':1
-   })
- }
-
- teamB(){
-   console.log(db);
-   db.ref('/').update({
-     'teamB':2
-   })
- }
+  teamB() {
+    console.log(db);
+    db.ref('/').update({
+      teamB: 2,
+    });
+  }
 
   render() {
     return (
@@ -40,19 +39,42 @@ export default class HomeScreen extends Component {
             </TouchableOpacity>
           </View>
           <View style={styles.ratingContainer}>
-            <Text style={{ textAlign: 'center',fontSize:25 }}>Vote Here</Text>
-            <TouchableOpacity
-              style={styles.buttons}
-              onPress ={this.teamA()}>
-              <Text style={{ fontSize:20}}>Team A</Text>
-            </TouchableOpacity>
+            <Text style={{ textAlign: 'center', fontSize: 25 }}>Vote Here</Text>
+            <View style={{ flex: 1, flexDirection: 'row' }}>
+              <TouchableOpacity style={styles.buttons} onPress={this.teamA()}>
+                <Text style={{ fontSize: 20 }}>Team A</Text>
+              </TouchableOpacity>
 
-            <TouchableOpacity
-              style={styles.buttons}
-              onPress ={this.teamB()}>
-              <Text style={{ fontSize:20}}>Team B</Text>
-            </TouchableOpacity>
-
+              <TouchableOpacity style={styles.buttons} onPress={this.teamB()}>
+                <Text style={{ fontSize: 20 }}>Team B</Text>
+              </TouchableOpacity>
+            </View>
+            <Text style={{ textAlign: 'center', fontSize: 25 }}>Rating</Text>
+            <View style={{ flex: 1, flexDirection: 'row' }}>
+              <Image
+                style={{
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  alignSelf: 'center',
+                  margin: 10,
+                  width: 40,
+                  height: 40,
+                  marginLeft: 100,
+                }}
+                source={require('../assets/thumbs-up-hand-symbol.png')}
+              />
+              <Image
+                style={{
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  alignSelf: 'center',
+                  margin: 10,
+                  width: 40,
+                  height: 40,
+                }}
+                source={require('../assets/thumbs-down-silhouette.png')}
+              />
+            </View>
           </View>
         </View>
       </View>
@@ -66,13 +88,13 @@ const styles = StyleSheet.create({
     marginTop: 50,
   },
   buttons: {
-    backgroundColor:"coral",
+    backgroundColor: 'coral',
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1,
     borderRadius: 15,
-    margin:10,
-    width: 150,
+    margin: 10,
+    width: 130,
     height: 50,
   },
   ratingContainer: {
